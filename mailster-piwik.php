@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Mailster Piwik
-Plugin URI: https://mailster.co/?utm_campaign=wporg&utm_source=Piwik+Analytics+for+Mailster
+Plugin URI: https://mailster.co/?utm_campaign=wporg&utm_source=Piwik+Analytics+for+Mailster&utm_medium=plugin
 Description: Integrates Piwik Analytics with Mailster Newsletter Plugin to track your clicks with the open source Analytics service
 This requires at least version 2.2 of the plugin
 Version: 1.0
@@ -305,7 +305,7 @@ class MailsterPiwikAnalytics {
 	 * @return void
 	 */
 	public function notice() {
-		$msg = sprintf( esc_html__( 'You have to enable the %s to use the Piwik Extension!', 'mailster-piwik' ), '<a href="https://mailster.co/?utm_campaign=wporg&utm_source=Piwik+Analytics+for+Mailster">Mailster Newsletter Plugin</a>' );
+		$msg = sprintf( esc_html__( 'You have to enable the %s to use the Piwik Extension!', 'mailster-piwik' ), '<a href="https://mailster.co/?utm_campaign=wporg&utm_source=Piwik+Analytics+for+Mailster&utm_medium=plugin">Mailster Newsletter Plugin</a>' );
 		?>
 		<div class="error"><p><strong><?php	echo $msg; ?></strong></p></div>
 		<?php

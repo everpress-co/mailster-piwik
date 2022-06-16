@@ -20,6 +20,10 @@ Requires the Mailster Newsletter plugin and the Piwik Analytics tracking code on
 1. Upload plugin files to your plugins folder, or install using WordPress' built-in Add New Plugin installer
 2. Activate the plugin
 
+## Screenshots
+
+1. Option Interface
+
 ## Frequently Asked Questions
 
 ### What does the plugin require to work correctly?

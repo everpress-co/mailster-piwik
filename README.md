@@ -22,7 +22,10 @@ Requires the Mailster Newsletter plugin and the Piwik Analytics tracking code on
 
 ## Screenshots
 
-1. Option Interface
+### 1. Option Interface
+
+![Option Interface](https://ps.w.org/mailster-piwik/assets/screenshot-1.png)
+
 
 ## Frequently Asked Questions
 

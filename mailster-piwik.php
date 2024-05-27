@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: Mailster Piwik
-Plugin URI: https://mailster.co/?utm_campaign=wporg&utm_source=Piwik+Analytics+for+Mailster&utm_medium=plugin
+Plugin URI: https://mailster.co/?utm_campaign=wporg&utm_source=wordpress.org&utm_medium=plugin&utm_term=Piwik+Analytics
 Description: Integrates Piwik Analytics with Mailster Newsletter Plugin to track your clicks with the open source Analytics service
 This requires at least version 2.2 of the plugin
-Version: 1.0
+Version: 1.0.0
 Author: EverPress
 Author URI: https://mailster.co
 Text Domain: mailster-piwik
@@ -56,7 +56,6 @@ class MailsterPiwikAnalytics {
 			add_filter( 'mailster_redirect_to', array( &$this, 'redirect_to' ), 1, 2 );
 
 		}
-
 	}
 
 
@@ -154,7 +153,6 @@ class MailsterPiwikAnalytics {
 			update_post_meta( $post_id, 'mailster-piwik', $save );
 
 		}
-
 	}
 
 
@@ -260,7 +258,7 @@ class MailsterPiwikAnalytics {
 		<tr valign="top">
 			<th scope="row"><?php _e( 'SetDomains:', 'mailster-piwik' ); ?></th>
 			<td>
-			<p><input type="text" name="mailster_options[piwik_setdomains]" value="<?php echo esc_attr( mailster_option( 'piwik_setdomains' ) ); ?>" class="regular-text" placeholder="*.example.com"> <span class="description"><?php echo sprintf( __( '(Optional) Sets the %s variable.', 'mailster-piwik' ), '<code>setDomains</code>' ); ?></span></p>
+			<p><input type="text" name="mailster_options[piwik_setdomains]" value="<?php echo esc_attr( mailster_option( 'piwik_setdomains' ) ); ?>" class="regular-text" placeholder="*.example.com"> <span class="description"><?php printf( __( '(Optional) Sets the %s variable.', 'mailster-piwik' ), '<code>setDomains</code>' ); ?></span></p>
 			</td>
 		</tr>
 		<tr valign="top">
@@ -305,11 +303,10 @@ class MailsterPiwikAnalytics {
 	 * @return void
 	 */
 	public function notice() {
-		$msg = sprintf( esc_html__( 'You have to enable the %s to use the Piwik Extension!', 'mailster-piwik' ), '<a href="https://mailster.co/?utm_campaign=wporg&utm_source=Piwik+Analytics+for+Mailster&utm_medium=plugin">Mailster Newsletter Plugin</a>' );
+		$msg = sprintf( esc_html__( 'You have to enable the %s to use the Piwik Extension!', 'mailster-piwik' ), '<a href="https://mailster.co/?utm_campaign=wporg&utm_source=wordpress.org&utm_medium=plugin&utm_term=Piwik+Analytics">Mailster Newsletter Plugin</a>' );
 		?>
 		<div class="error"><p><strong><?php	echo $msg; ?></strong></p></div>
 		<?php
-
 	}
 
 
@@ -351,7 +348,6 @@ class MailsterPiwikAnalytics {
 		})();
 	</script>
 		<?php
-
 	}
 
 	/**
@@ -368,9 +364,7 @@ class MailsterPiwikAnalytics {
 				mailster_notice( sprintf( __( 'Please enter your site ID and domain on the %s!', 'mailster-piwik' ), '<a href="edit.php?post_type=newsletter&page=mailster_settings&mailster_remove_notice=piwik_analytics#piwik">Settings Page</a>' ), '', false, 'piwik_analytics' );
 			}
 		}
-
 	}
-
 }
 
 new MailsterPiwikAnalytics();

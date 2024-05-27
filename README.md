@@ -1,10 +1,10 @@
 # Mailster Piwik
 
-Contributors: everpress, xaverb  
+Contributors: everpress, mailster, xaverb  
 Tags: mailster, analytics, piwik, tracking  
-Requires at least: 3.8  
-Tested up to: 6.0  
-Stable tag: 1.0  
+Requires at least: 6.0  
+Tested up to: 6.5  
+Stable tag: 1.0.0  
 License: GPLv2 or later
 
 ## Description
@@ -34,6 +34,6 @@ You need the [Mailster Newsletter Plugin for WordPress](https://mailster.co/?utm
 
 ## Changelog
 
-### 1.0
+### 1.0.0
 
--   initial release
+- initial release

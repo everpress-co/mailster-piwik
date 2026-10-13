@@ -1,6 +1,6 @@
 {
 	"name": "everpress/mailster-piwik",
-	"description": "Dev dependencies for Mailster Piwik",
+	"description": "Dev dependencies for Mailster Matomo",
 	"require-dev": {
 		"wp-coding-standards/wpcs": "^3.0",
 		"dealerdirect/phpcodesniffer-composer-installer": "^0.7"

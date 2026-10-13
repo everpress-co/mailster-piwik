@@ -1,7 +1,7 @@
 {
 	"name": "mailster-piwik",
 	"version": "1.0.0",
-	"description": "Piwik Analytics integration for Mailster to track newsletter clicks.",
+	"description": "Matomo Analytics integration for Mailster to track newsletter clicks.",
 	"author": "EverPress",
 	"license": "GPL-2.0-or-later",
 	"keywords": [

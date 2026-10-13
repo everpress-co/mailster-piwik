@@ -187,9 +187,44 @@ class MailsterPiwikAnalytics {
 			$save = array();
 		}
 
-		$posted = map_deep( wp_unslash( $_POST['mailster_piwik'] ), 'sanitize_text_field' );
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized via sanitize_tracking_value().
+		$posted = map_deep( wp_unslash( $_POST['mailster_piwik'] ), array( $this, 'sanitize_tracking_value' ) );
 		$save   = wp_parse_args( $posted, $save );
 		update_post_meta( $post_id, 'mailster-piwik', $save );
+	}
+
+
+	/**
+	 * Sanitizes a tracking field while preserving %%PLACEHOLDER%% tokens.
+	 *
+	 * WordPress sanitize_text_field() strips percent-encoded octets, which corrupts
+	 * tokens like %%CAMP_TITLE%% into %MP_TITLE%%.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param mixed $value Raw posted value.
+	 * @return string Sanitized value with supported placeholders restored.
+	 */
+	public function sanitize_tracking_value( $value ) {
+
+		if ( ! is_string( $value ) ) {
+			return '';
+		}
+
+		$tokens = array();
+		$index  = 0;
+
+		$protected = preg_replace_callback(
+			'/%%[A-Z0-9_]+%%/',
+			static function ( $matches ) use ( &$tokens, &$index ) {
+				$key            = '{{MAILSTER_PIWIK_' . ( $index++ ) . '}}';
+				$tokens[ $key ] = $matches[0];
+				return $key;
+			},
+			$value
+		);
+
+		return strtr( sanitize_text_field( $protected ), $tokens );
 	}
 
 

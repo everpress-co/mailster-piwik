@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Mailster Piwik
- * Plugin URI: https://mailster.co/?utm_campaign=wporg&utm_source=wordpress.org&utm_medium=plugin&utm_term=Piwik+Analytics
- * Description: Integrates Piwik Analytics with Mailster Newsletter Plugin to track your clicks with the open source Analytics service
+ * Plugin Name: Mailster Matomo
+ * Plugin URI: https://mailster.co/?utm_campaign=wporg&utm_source=wordpress.org&utm_medium=plugin&utm_term=Matomo+Analytics
+ * Description: Integrates Matomo Analytics with Mailster Newsletter Plugin to track your clicks with the open source Analytics service
  * This requires at least version 2.2 of the plugin
  * Version: 1.0.0
  * Author: EverPress
@@ -16,7 +16,7 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Integrates Piwik Analytics click tracking with Mailster campaigns.
+ * Integrates Matomo Analytics click tracking with Mailster campaigns.
  *
  * @since 1.0.0
  */
@@ -90,13 +90,13 @@ class MailsterPiwikAnalytics {
 
 
 	/**
-	 * Appends Piwik campaign query args to same-site click redirect URLs.
+	 * Appends Matomo campaign query args to same-site click redirect URLs.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $target      Destination URL for the click.
 	 * @param int    $campaign_id Campaign post ID.
-	 * @return string Redirect URL, possibly with Piwik tracking parameters.
+	 * @return string Redirect URL, possibly with Matomo tracking parameters.
 	 */
 	public function redirect_to( $target, $campaign_id ) {
 
@@ -160,7 +160,7 @@ class MailsterPiwikAnalytics {
 
 
 	/**
-	 * Saves per-campaign Piwik tracking values from the campaign edit screen.
+	 * Saves per-campaign Matomo tracking values from the campaign edit screen.
 	 *
 	 * @since 1.0.0
 	 *
@@ -229,18 +229,18 @@ class MailsterPiwikAnalytics {
 
 
 	/**
-	 * Adds the Piwik section to Mailster settings tabs.
+	 * Adds the Matomo section to Mailster settings tabs.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param array $settings Existing Mailster setting sections.
-	 * @return array Sections with the Piwik tab inserted.
+	 * @return array Sections with the Matomo tab inserted.
 	 */
 	public function settings_tab( $settings ) {
 
 		$position = 11;
 		$settings = array_slice( $settings, 0, $position, true ) +
-					array( 'piwik' => 'Piwik' ) +
+					array( 'piwik' => 'Matomo' ) +
 					array_slice( $settings, $position, null, true );
 
 		return $settings;
@@ -248,7 +248,7 @@ class MailsterPiwikAnalytics {
 
 
 	/**
-	 * Registers the campaign Piwik metabox when campaign-based values are enabled.
+	 * Registers the campaign Matomo metabox when campaign-based values are enabled.
 	 *
 	 * @since 1.0.0
 	 *
@@ -257,13 +257,13 @@ class MailsterPiwikAnalytics {
 	public function add_meta_boxes() {
 
 		if ( mailster_option( 'piwik_campaign_based' ) ) {
-			add_meta_box( 'mailster_piwik', 'Piwik Analytics', array( &$this, 'metabox' ), 'newsletter', 'side', 'low' );
+			add_meta_box( 'mailster_piwik', 'Matomo Analytics', array( &$this, 'metabox' ), 'newsletter', 'side', 'low' );
 		}
 	}
 
 
 	/**
-	 * Renders the campaign-side Piwik campaign name and keyword fields.
+	 * Renders the campaign-side Matomo campaign name and keyword fields.
 	 *
 	 * @since 1.0.0
 	 *
@@ -296,7 +296,7 @@ class MailsterPiwikAnalytics {
 	}
 
 	/**
-	 * Renders the Mailster settings tab for Piwik site ID, domain, and defaults.
+	 * Renders the Mailster settings tab for Matomo site ID, domain, and defaults.
 	 *
 	 * @since 1.0.0
 	 *
@@ -345,7 +345,7 @@ class MailsterPiwikAnalytics {
 			<p><input type="text" name="mailster_options[piwik_setdomains]" value="<?php echo esc_attr( mailster_option( 'piwik_setdomains' ) ); ?>" class="regular-text" placeholder="*.example.com"> <span class="description">
 			<?php
 			printf(
-				/* translators: %s: Piwik setDomains JavaScript API name */
+				/* translators: %s: Matomo setDomains JavaScript API name */
 				esc_html__( '(Optional) Sets the %s variable.', 'mailster-piwik' ),
 				'<code>setDomains</code>'
 			);
@@ -395,14 +395,14 @@ class MailsterPiwikAnalytics {
 	 * @return void
 	 */
 	public function notice() {
-		$mailster_link = '<a href="' . esc_url( 'https://mailster.co/?utm_campaign=wporg&utm_source=wordpress.org&utm_medium=plugin&utm_term=Piwik+Analytics' ) . '">Mailster Newsletter Plugin</a>';
+		$mailster_link = '<a href="' . esc_url( 'https://mailster.co/?utm_campaign=wporg&utm_source=wordpress.org&utm_medium=plugin&utm_term=Matomo+Analytics' ) . '">Mailster Newsletter Plugin</a>';
 		?>
 		<div class="error"><p><strong>
 		<?php
 		echo wp_kses(
 			sprintf(
 				/* translators: %s: link to the Mailster Newsletter Plugin */
-				__( 'You have to enable the %s to use the Piwik Extension!', 'mailster-piwik' ),
+				__( 'You have to enable the %s to use the Matomo Extension!', 'mailster-piwik' ),
 				$mailster_link
 			),
 			array(
@@ -418,7 +418,7 @@ class MailsterPiwikAnalytics {
 
 
 	/**
-	 * Outputs the Piwik JavaScript tracker in the Mailster campaign preview footer.
+	 * Outputs the Matomo JavaScript tracker in the Mailster campaign preview footer.
 	 *
 	 * @since 1.0.0
 	 *
@@ -463,7 +463,7 @@ class MailsterPiwikAnalytics {
 	}
 
 	/**
-	 * Shows a setup notice on activation when Piwik site ID is not configured.
+	 * Shows a setup notice on activation when Matomo site ID is not configured.
 	 *
 	 * @since 1.0.0
 	 *
@@ -476,7 +476,7 @@ class MailsterPiwikAnalytics {
 			if ( ! mailster_option( 'piwik_siteid' ) ) {
 				mailster_notice(
 					sprintf(
-						/* translators: %s: link to the Mailster Piwik settings page */
+						/* translators: %s: link to the Mailster Matomo settings page */
 						__( 'Please enter your site ID and domain on the %s!', 'mailster-piwik' ),
 						'<a href="edit.php?post_type=newsletter&page=mailster_settings&mailster_remove_notice=piwik_analytics#piwik">Settings Page</a>'
 					),

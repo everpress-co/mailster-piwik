@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress Coding Standards for Mailster Piwik">
+<ruleset name="WordPress Coding Standards for Mailster Matomo">
 	<description>Sniffs for WordPress plugins, with minor modifications for Mailster</description>
 
 	<config name="testVersion" value="7.4-"/>

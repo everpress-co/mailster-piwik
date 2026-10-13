@@ -17,7 +17,7 @@ Requires the Mailster Newsletter plugin and the Piwik Analytics tracking code on
 
 ## Installation
 
-1. Upload plugin files to your plugins folder, or install using WordPress' built-in Add New Plugin installer
+1. Upload the entire `mailster-piwik` folder to the `/wp-content/plugins/` directory, or install using WordPress' built-in Add New Plugin installer
 2. Activate the plugin
 
 ## Screenshots
@@ -33,6 +33,8 @@ Requires the Mailster Newsletter plugin and the Piwik Analytics tracking code on
 You need the [Mailster Newsletter Plugin for WordPress](https://mailster.co/?utm_campaign=wporg&utm_source=wordpress.org&utm_medium=readme&utm_term=Piwik+Analytics)
 
 ## Changelog
+
+### Unreleased
 
 ### 1.0.0
 

@@ -4,7 +4,7 @@
  * Plugin URI: https://mailster.co/?utm_campaign=wporg&utm_source=wordpress.org&utm_medium=plugin&utm_term=Matomo+Analytics
  * Description: Integrates Matomo Analytics with Mailster Newsletter Plugin to track your clicks with the open source Analytics service
  * This requires at least version 2.2 of the plugin
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: EverPress
  * Author URI: https://mailster.co
  * Text Domain: mailster-piwik

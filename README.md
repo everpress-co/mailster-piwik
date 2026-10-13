@@ -3,8 +3,8 @@
 Contributors: everpress, mailster, xaverb  
 Tags: mailster, matomo, piwik, analytics, newsletter  
 Requires at least: 6.0  
-Tested up to: 6.5  
-Stable tag: 1.0.0  
+Tested up to: 7.1
+Stable tag: 1.1.0  
 License: GPLv2 or later
 
 Track Mailster newsletter link clicks in Matomo (formerly Piwik) with pk_campaign and pk_kwd campaign parameters.
@@ -97,7 +97,7 @@ Settings for Site ID, domain, defaults, and campaign-based overrides.
 
 ## Changelog
 
-### Unreleased
+### 1.1.0
 
 * Rename plugin branding and UI labels from Piwik to Matomo (slugs and option keys unchanged).
 

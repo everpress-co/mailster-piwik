@@ -1,22 +1,72 @@
 name: Create Release
+
+# Slack (GitHub app): this channel should only post releases.
+# A bare /github subscribe turns on issues, pulls, commits, releases, and deployments.
+# Unsubscribe from all of those first, then subscribe to releases only:
+# /github unsubscribe everpress-co/mailster-piwik
+# /github subscribe everpress-co/mailster-piwik releases
+
 on:
   push:
     tags:
-      - '*'
+      - "*"
+
+permissions:
+  contents: write
+
 jobs:
-  build:
-    name: Create Release
+  release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Create Release
-        id: create_release
-        uses: everpress-co/create-release@main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify package.json and required scripts
+        run: |
+          test -f package.json || (echo "package.json is required" && exit 1)
+          jq -e '.scripts["plugin-zip"]' package.json > /dev/null || (echo "plugin-zip script is required" && exit 1)
+          jq -e '.scripts["lint"]' package.json > /dev/null || (echo "lint script is required" && exit 1)
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          draft: false
-          prerelease: false
+          node-version: "24"
+          cache: npm
+
+      - name: CI gate
+        run: |
+          npm ci
+          npm run lint
+          npm run build --if-present
+          npm run plugin-zip
+
+      - name: Convert README.md to WordPress readme.txt
+        uses: everpress-co/action-md2wp@main
+
+      - name: Remove Markdown readme before production zip
+        run: rm -f README.md
+
+      - name: Read project name
+        id: project
+        run: echo "name=$(jq -r '.name' package.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Create production plugin zip
+        run: npm run plugin-zip
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.project.outputs.name }}.zip
+
+      - name: Prepare deploy directory
+        run: unzip "${{ steps.project.outputs.name }}.zip" -d deploy
+
+      - name: WordPress Plugin Deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        with:
+          generate-zip: false
+        env:
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          BUILD_DIR: deploy/${{ steps.project.outputs.name }}

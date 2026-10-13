@@ -1,0 +1,35 @@
+{
+	"name": "mailster-piwik",
+	"version": "1.0.0",
+	"description": "Piwik Analytics integration for Mailster to track newsletter clicks.",
+	"author": "EverPress",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"mailster",
+		"analytics",
+		"piwik",
+		"tracking",
+		"newsletter"
+	],
+	"homepage": "https://mailster.co",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/everpress-co/mailster-piwik.git"
+	},
+	"bugs": {
+		"url": "https://github.com/everpress-co/mailster-piwik/issues"
+	},
+	"files": [
+		"*.php",
+		"readme.txt"
+	],
+	"devDependencies": {
+		"@wordpress/scripts": "^36.1.0"
+	},
+	"scripts": {
+		"plugin-zip": "wp-scripts plugin-zip",
+		"lint": "npm run lint:pkg-json",
+		"lint:pkg-json": "wp-scripts lint-pkg-json",
+		"packages-update": "wp-scripts packages-update"
+	}
+}

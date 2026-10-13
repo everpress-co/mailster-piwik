@@ -51,4 +51,9 @@
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 	<exclude-pattern>*/build/*</exclude-pattern>
 
+	<!-- Bootstrap file ships the plugin class (WP.org slug filename). -->
+	<rule ref="WordPress.Files.FileName.InvalidClassFileName">
+		<exclude-pattern>*/mailster-piwik.php</exclude-pattern>
+	</rule>
+
 </ruleset>

@@ -13,8 +13,6 @@
  * @package Mailster_Piwik
  */
 
-// phpcs:ignore WordPress.Files.FileName.InvalidClassFileName -- Main plugin bootstrap file.
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -113,10 +111,12 @@ class MailsterPiwikAnalytics {
 
 		if ( isset( $wp->query_vars['_mailster_hash'] ) ) {
 			$hash = $wp->query_vars['_mailster_hash'];
-		} elseif ( isset( $_REQUEST['k'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Email click tracking links.
-			$hash = preg_replace( '/\s+/', '', sanitize_text_field( wp_unslash( $_REQUEST['k'] ) ) );
 		} else {
-			$hash = null;
+			// phpcs:disable WordPress.Security.NonceVerification.Recommended -- Email click tracking links.
+			$hash = isset( $_REQUEST['k'] )
+				? preg_replace( '/\s+/', '', sanitize_text_field( wp_unslash( $_REQUEST['k'] ) ) )
+				: null;
+			// phpcs:enable WordPress.Security.NonceVerification.Recommended
 		}
 
 		$subscriber = mailster( 'subscribers' )->get_by_hash( $hash );
@@ -406,8 +406,10 @@ class MailsterPiwikAnalytics {
 		var _paq = _paq || [];
 		<?php
 		if ( $set_domains ) {
-			$escaped_domains = array_map( 'esc_js', $set_domains );
-			echo "_paq.push(['setDomains', ['" . implode( "','", $escaped_domains ) . "']]);";
+			printf(
+				'_paq.push([\'setDomains\', %s]);',
+				wp_json_encode( array_values( $set_domains ) )
+			);
 		}
 		?>
 
